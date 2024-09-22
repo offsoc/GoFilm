@@ -717,7 +717,7 @@ func GetSearchPage(s SearchVo) []SearchInfo {
 	if s.Language != "" {
 		query = query.Where("language = ?", s.Language)
 	}
-	if int(s.Year) > time.Now().Year()-12 {
+	if s.Year > 0 && s.Year <= int64(time.Now().Year()) {
 		query = query.Where("year = ?", s.Year)
 	}
 	switch s.Remarks {
