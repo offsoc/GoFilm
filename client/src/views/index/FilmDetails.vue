@@ -99,6 +99,7 @@ import {useRouter} from "vue-router";
 import {onBeforeMount, reactive, ref,} from "vue";
 import {ApiGet} from "../../utils/request";
 import {ElMessage} from 'element-plus'
+import sanitizeHtml from 'sanitize-html';
 import {Promotion, CaretRight} from "@element-plus/icons-vue";
 import RelateList from "../../components/index/RelateList.vue";
 // 获取路由对象
@@ -188,7 +189,7 @@ onBeforeMount(() => {
       data.detail = resp.data.detail
       // 去除影视简介中的无用内容和特殊标签格式等
       data.detail.name = data.detail.name.replace(/(～.*～)/g, '')
-      data.detail.descriptor.content = data.detail.descriptor.content.replace(/(&.*;)|( )|(　　)|(\n)|(<[^>]+>)/g, '')
+      data.detail.descriptor.content = sanitizeHtml(data.detail.descriptor.content)
       data.relate = resp.data.relate
       // 处理过长数据
       data.detail.descriptor.actor = handleLongText(data.detail.descriptor.actor)
