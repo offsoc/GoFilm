@@ -33,7 +33,7 @@ func FilmSearchPage(c *gin.Context) {
 	if year == "" {
 		s.Year = 0
 	} else {
-		s.Year, err = strconv.ParseInt(year, 10, 64)
+		s.Year, err = strconv.ParseInt(year, 10, 32)
 		if err != nil {
 			system.Failed("影片分页数据获取失败, 请求参数异常", c)
 			return
